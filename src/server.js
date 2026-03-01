@@ -4,6 +4,7 @@ import express from "express";
 import cors from "cors";
 import connectDB from "./lib/db.js";
 import connectCloudinary from "./lib/cloudinary.js";
+import userRouter from "./routes/auth.routes.js";
 
 
 await connectDB();
@@ -18,12 +19,16 @@ app.use(express.json());
 app.use(cors({ origin: allowedOrigins, withCredentials: true }));
 
 
-const PORT = process.env.PORT || 5000;
+// routes
+
+app.use("/api/auth",userRouter)
+
 
 app.use("/", (req, res) => {
   res.send("Welcome to the FARA Food Delivery API!");
 });
 
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

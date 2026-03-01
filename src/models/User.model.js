@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 const userSchema = new mongoose.Schema(
@@ -92,7 +92,7 @@ userSchema.statics.hashPassword = async function (password) {
 
 userSchema.methods.generateJWTToken = function () {
   const payload = {
-    id: this._id,
+    userId: this._id,
     role: this.role,
   };
   return jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_IN });

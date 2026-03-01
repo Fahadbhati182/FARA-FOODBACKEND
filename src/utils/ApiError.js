@@ -7,7 +7,6 @@ class ApiError extends Error {
     this.status = status;
   }
 
-  static BadRequest(message) {
-    return new ApiError(400, message);
-  }
 }
+
+export default ApiError;
